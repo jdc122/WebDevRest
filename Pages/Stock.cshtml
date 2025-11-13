@@ -1,0 +1,57 @@
+﻿@page
+@model OceansideRestaurant.Pages.StockModel
+@{
+ViewData["Title"] = "Stock";
+Layout = "_Layout";
+}
+
+<h1>Stock</h1>
+<table class="table">
+    <thead>
+
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var menu in Model.Menu)
+    {
+        <tr>
+            <td>@menu.Name</td>
+            <td>@menu.Description</td>
+            <td>@menu.Price.ToString("C")</td>
+            <td>@menu.Active</td>
+            <td>
+                <a asp-page="/Admin/Edit" asp-route-id="@menu.ID">Edit</a>
+                <button type="submit" asp-page-handler="Delete" asp-route-itemID="@menu.ID">Delete</button>
+            </td>
+            @{
+                try
+                {
+                    <td>
+                        <img src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(menu.ImageData))" alt="@menu.ImageDescription"/>
+                    </td>
+                }
+                catch
+                {
+                    <td>
+                        <img src="Images/empty.png" alt="No Image Provided"/>
+                    </td>
+                }
+            }
+            <td>
+                <button type="submit" asp-page-handler="Buy"
+                        asp-route-itemID="@menu.ID">Buy</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h2>Search</h2>
+<form method="post">
+    <div>Search <input asp-for="Search"/></div>
+    <button type="submit" asp-page-handler="Search">Submit</button>
+</form>

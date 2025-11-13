@@ -1,0 +1,23 @@
+﻿body {
+     background: rgb(102, 0, 153);
+    background: linear-gradient(180deg, rgba(102, 0, 153, 1) 15%, rgba(151, 59, 150, 1) 48%, rgba(103, 147, 169, 1) 65%, rgba(186, 146, 69, 1) 82%);
+}
+.columnContainer {
+    display: flex;
+}
+#leftColumn {
+    flex: 10%;
+}
+#rightColumn {
+    flex: 10%;
+}
+
+#mainPage {
+    flex: 80%;
+}
+.warning-text{
+    color:white;
+    background-color:crimson;
+    font-size:12px;
+    border-radius:5px;
+}

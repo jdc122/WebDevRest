@@ -1,0 +1,38 @@
+﻿@page
+@model OceansideRestaurant.Admin.StockModel
+@{
+}
+<h1>Stock</h1>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var menu in Model.Menu)
+        {
+            <tr>
+                <td>@menu.Name</td>
+                <td>@menu.Description</td>
+                <td>@menu.Price.ToString("C")</td>
+                <td>@menu.Active</td>
+                <td>
+                    <a asp-page="/Admin/Edit" asp-route-id="@menu.ID"><h2>Edit Item - @menu.Name</h2></a>
+                    <button type="submit" asp-page-handler="Delete" asp-route-itemID="@menu.ID">Delete</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </form>
+    <h2>Search</h2>
+<form method="post">
+    <div>Search <input asp-for="Search"/></div>
+    <button type="submit" asp-page-handler="Search">Submit</button>
+</form>

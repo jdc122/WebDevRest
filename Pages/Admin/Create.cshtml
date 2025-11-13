@@ -1,0 +1,39 @@
+﻿@page
+@model OceansideRestaurant.Pages.Admin.CreateModel
+@{
+
+    ViewData["Title"] = "Create";
+    Layout = "_Layout";
+}
+<h1>Create - Menu Item</h1>
+<p>Enters details of the item:</p>
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Menu.Name">Name:</label>
+        <input asp-for="Menu.Name"/>
+        <span class="warning-text" asp-validation-for="Menu.Name"></span>
+    </div>
+    <div>
+        <label asp-for="Menu.Price">Price:</label>
+        <input ap-for="Menu.Price"/>
+        <span class="warning-text" asp-validation-for="Menu.Price"></span>
+    </div>
+    <div>
+        <label asp-for="Menu.Description">Description:</label>
+        <input asp-for="Menu.Description"/>
+        <span class="warning-text" asp-validation-for="Menu.Description"></span>
+    </div>
+    <div>
+        <label asp-for="Menu.ImageDescription">Image Description:</label>
+        <input asp-for="Menu.ImageDescription"/>
+        <span class="warning-text" asp-validation-for="Menu.ImageDescription"></span>
+    </div>
+    <div>
+        Upload Image:<br/>
+        <input type="file" id="file1"
+               name="file1"
+               multiple="multiple"/>
+    </div>
+    <input type="submit"/>
+</form>

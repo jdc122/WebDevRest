@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="../wwwroot/CSS/header.css" type="text/css" />
+    <link rel="stylesheet" href="../wwwroot/CSS/footer.css" type="text/css" />
+    <link rel="stylesheet" href="../wwwroot/CSS/mainPage.css" type="text/css" />
+</head>
+<body>
+    <nav>
+        <a asp-page="/Index">Home</a>
+        <a asp-page="/Admin/Create">Create</a>
+        <a asp-page="/Stock">Stock</a>
+        <a asp-page="/Admin/Stock">Stock (Admin)</a>
+        <a asp-page="/Account/Register">Register</a>
+        <a asp-page="/Account/Login">Log in</a>
+        <form asp-page="/Account/Logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+        <a asp-page="/Checkout">Checkout</a>
+
+    </nav>
+<div class="columnContainer">
+    <div id="leftColumn">
+        <h1>This is the left column</h1>
+
+    </div>
+    <div id="mainPage">
+        @RenderBody()
+    </div>
+    <div id="rightColumn">
+                <h1>This is the Right column</h1>
+    </div>
+</div>
+</body>
+</html>
