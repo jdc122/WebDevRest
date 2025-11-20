@@ -13,22 +13,33 @@ namespace OceansideRestaurant.Pages
 {
     public class CheckoutModel : PageModel
     {
-        private readonly AppDbContext _db;
-        private readonly UserManager<ApplicationUser> _UserManager;
+        // Comment out dependencies temporarily
+        // private readonly AppDbContext _db;
+        // private readonly UserManager<ApplicationUser> _UserManager;
         public IList<CheckoutItems> Items { get; private set; }
         public OrderHistory Order = new OrderHistory();
 
         public decimal Total = 0;
         public long AmountPayable = 0;
 
+        public CheckoutModel()
+        {
+            // Empty constructor - no dependencies injected
+            Items = new List<CheckoutItems>(); // Initialize to avoid null reference
+        }
+
+        /*
         public CheckoutModel(AppDbContext db, UserManager<ApplicationUser> UserManager)
         {
             _db = db;
             _UserManager = UserManager;
         }
+        */
 
         public async Task OnGetAsync()
         {
+            // Temporarily disabled - requires database and user authentication
+            /*
             var user = await _UserManager.GetUserAsync(User);
             CheckoutCustomer customer = await _db.CheckoutCustomers.FindAsync(user.Email);
 
@@ -46,9 +57,16 @@ namespace OceansideRestaurant.Pages
                 Total += (item.Quantity * item.Price);
             }
             AmountPayable = (long)(Total * 100);
+            */
+
+            // Temporary placeholder - remove when database is connected
+            await Task.CompletedTask;
         }
+
         public async Task Process()
         {
+            // Temporarily disabled - requires database
+            /*
             var currentOrder = _db.OrderHistories
                 .FromSqlRaw("SELECT * From OrderHistories")
                 .OrderByDescending(b => b.OrderNo)
@@ -90,12 +108,19 @@ namespace OceansideRestaurant.Pages
             await _db.SaveChangesAsync();
 
             Process().Wait(); 
+            */
+
+            // Temporary placeholder - remove when database is connected
+            await Task.CompletedTask;
         }
+
         public IActionResult OnPostCharge(
             string stripeEmail,
             string stripeToken,
             long amount)
         {
+            // Temporarily disabled - Stripe functionality
+            /*
             var customers = new CustomerService();
             var charges = new ChargeService();
 
@@ -112,6 +137,7 @@ namespace OceansideRestaurant.Pages
                 Currency = "gbp",
                 Customer = customer.Id
             });
+            */
             return RedirectToPage("/Index");
         }
     }

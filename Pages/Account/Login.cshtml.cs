@@ -1,42 +1,55 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Humanizer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using Mono.TextTemplating;
 using OceansideRestaurant.Data;
+using Stripe;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Net.NetworkInformation;
+using System.Runtime.Intrinsics.X86;
+using System.Security.Policy;
+using System.Security.Principal;
+using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OceansideRestaurant.Pages.Account
 {
     public class LoginModel : PageModel
     {
         [BindProperty]
-        public LoginUser Input { get; set;}
+        public LoginUser Input { get; set; }
 
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        //  private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager)
+        public LoginModel()
         {
-            _signInManager = signInManager;
+            // Empty constructor
         }
 
+        /*  public LoginModel(SignInManager<ApplicationUser> signInManager)
+          {
+              _signInManager = signInManager;
+          }
+        */
         public async Task<IActionResult> OnPOstAsync()
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    return RedirectToPage("/Index");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
-            }
-            return Page();
+            return RedirectToPage("/Index");
         }
     }
 }
+
+

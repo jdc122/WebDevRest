@@ -26,7 +26,9 @@ namespace OceansideRestaurant
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddDbContext<AppDbContext>(options =>
+
+            /*
+             * services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
              .AddEntityFrameworkStores<AppDbContext>()
@@ -39,6 +41,8 @@ namespace OceansideRestaurant
                 options.LogoutPath = new PathString("/Index");
             });
 
+             */
+            
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }
 
@@ -51,17 +55,21 @@ namespace OceansideRestaurant
                 app.UseDeveloperExceptionPage();
 
             }
+            
+           
+           // to do re-add stripe after setting up sql server
             StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
-            CreateRoles(serviceProvider).Wait();
+            // CreateRoles(serviceProvider).Wait();
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
             });
+            
         }
 
         private async Task  CreateRoles(IServiceProvider serviceProvider)
