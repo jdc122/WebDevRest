@@ -12,31 +12,23 @@ namespace OceansideRestaurant.Pages.Account
     public class LoginModel : PageModel
     {
         [BindProperty]
-        public LoginUser Input { get; set;}
+        public LoginUser Input { get; set; }
 
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        //  private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager)
+        public LoginModel()
         {
-            _signInManager = signInManager;
+            // Empty constructor
         }
 
+        /*  public LoginModel(SignInManager<ApplicationUser> signInManager)
+          {
+              _signInManager = signInManager;
+          }
+        */
         public async Task<IActionResult> OnPOstAsync()
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    return RedirectToPage("/Index");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
-            }
-            return Page();
+            return RedirectToPage("/Index");
         }
     }
 }

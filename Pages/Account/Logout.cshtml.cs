@@ -11,8 +11,16 @@ namespace OceansideRestaurant.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private LogoutModel(SignInManager<ApplicationUser> signInManager)
+        // Comment out Identity dependencies
+        // private readonly SignInManager<ApplicationUser> _signInManager;
+
+        public LogoutModel()
+        {
+            // Empty constructor
+        }
+
+        /*
+        public LogoutModel(SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
         }

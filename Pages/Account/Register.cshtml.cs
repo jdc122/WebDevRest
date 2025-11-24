@@ -22,7 +22,11 @@ namespace OceansideRestaurant.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public RegisterModel(
+        public RegisterModel()
+        {
+
+        }
+        /*
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             AppDbContext db)
@@ -32,28 +36,34 @@ namespace OceansideRestaurant.Pages.Account
             _db = db;
         }
 
+
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    NewBasket(Input.Email);
-                    NewCustomer(Input.Email);
-                    await _db.SaveChangesAsync();
-                    return RedirectToPage("/Index");
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+            // Temporarily return to index
+            return RedirectToPage("/Index");
+            /*  if (ModelState.IsValid)
+              {
+                  var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                  var result = await _userManager.CreateAsync(user, Input.Password);
+                  if (result.Succeeded)
+                  {
+                      await _signInManager.SignInAsync(user, isPersistent: false);
+                      NewBasket(Input.Email);
+                      NewCustomer(Input.Email);
+                      await _db.SaveChangesAsync();
+                      return RedirectToPage("/Index");
+                  }
+                  foreach (var error in result.Errors)
+                  {
+                      ModelState.AddModelError(string.Empty, error.Description);
+                  }
+              }
+              return Page();
             }
-            return Page();
+        */
         }
-        public void NewBasket(string Email)
+        /*  public void NewBasket(string Email)
         {
             Basket.Email = Email;
             var currentBasket = _db.Baskets.FromSqlRaw("SELECT * From Baskets").OrderByDescending(b => b.BasketID).FirstOrDefault();
@@ -67,6 +77,7 @@ namespace OceansideRestaurant.Pages.Account
             }
             _db.Baskets.Add(Basket);
         }
+        /*
         public void NewCustomer(string Email)
         {
             Customer.Email = Email;
