@@ -1,0 +1,40 @@
+﻿@page "{id:int}"
+@model OceansideRestaurant.Pages.Admin.EditModel
+@{
+    ViewData["Title"] = "Edit Stock";
+    Layout = "_Layout";
+}
+
+<h2>Edit Item - @Model.Item.Name</h2>
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    
+    <input asp-for="Item.ID" type="hidden"/>
+    <input asp-for="Item.Active" type="hidden"/>
+
+    <div>
+        <label asp-for="Item.Name">Name:</label>
+        <input asp-for="Item.Name"/>
+        <span class="warning-text" asp-validation-for="Item.Name"></span>
+    </div>
+    <div>
+        <label asp-for="Item.Price">Price:</label>
+        <input ap-for="Menu.Price"/>
+        <span class="warning-text" asp-validation-for="Item.Price"></span>
+    </div>
+    <div>
+        <label asp-for="Item.Description">Description:</label>
+        <input asp-for="Item.Description"/>
+        <span class="warning-text" asp-validation-for="Item.Description"></span>
+    </div>
+    <div>
+        <label asp-for="Item.ImageDescription">Image Description:</label>
+        <input asp-for="Item.ImageDescription"/>
+        <span class="warning-text" asp-validation-for="Item.ImageDescription"></span>
+    </div>
+    <div>
+        <button type="submit" asp-page-handler="Save">Save</button>
+    </div>
+</form>
+
+
